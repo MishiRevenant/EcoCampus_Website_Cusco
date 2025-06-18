@@ -40,6 +40,8 @@ body{
 #sidebar nav a{display:flex;align-items:center;gap:.75rem;padding:.7rem 1rem;font-size:.9rem;color:var(--text);border-left:4px solid transparent;transition:background .25s,border .25s;}
 #sidebar nav a:hover,#sidebar nav a.active{background:var(--surface2);border-color:var(--accent);}
 #sidebar nav a i{width:22px;text-align:center;}
+#sidebar.collapsed nav a{justify-content:center;gap:0;}
+#sidebar.collapsed nav a span{display:none;}
 #sidebar .toggle{padding:1rem;text-align:right;cursor:pointer;}
 
 /* --- MAIN --- */
