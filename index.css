@@ -110,3 +110,33 @@ tbody tr:hover{background:var(--surface2);}
 .stat h3{font-size:1.6rem;}
 .stat p{font-size:.85rem;color:var(--text-muted);}
 
+/* --- Mobile --- */
+@media (max-width: 768px) {
+  #sidebar {
+    width: 68px;
+  }
+  #sidebar .brand span,
+  #sidebar nav a span {
+    display: none;
+  }
+  #main {
+    margin-left: 68px;
+  }
+  .hero img {
+    height: 220px;
+  }
+}
+
+/* Ajustes adicionales para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  html { font-size: 14px; }
+  #sidebar .brand img { height: 24px; }
+  header h1 { font-size: 1rem; }
+  .hero-text h2 { font-size: 1.6rem; }
+  .hero-text p { font-size: .9rem; }
+  .feature i { font-size: 1.3rem; }
+  .feature h3 { font-size: .9rem; }
+  .feature p { font-size: .75rem; }
+  .hero img { height: 180px; }
+}
+
