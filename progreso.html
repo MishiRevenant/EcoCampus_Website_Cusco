@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Progreso · EcoCampus Continental Cusco</title>
+  <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfud-7zsPpyVW9AHJRZ9tBRBeSHVF09SQZZQ&s">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<aside id="sidebar">
+  <div class="brand">
+  <img src="https://ebiz.pe/wp-content/uploads/2025/03/logo-UNIVERSIDAD@2x.png" alt="Logo Universidad-Continental">
+    <span>EcoCampus</span>
+  </div>
+  <nav>
+    <a href="index.html" id="nav-inicio"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
+    <a href="retos.html" id="nav-retos"><i class="fa-solid fa-recycle"></i><span>Retos</span></a>
+    <a href="foro.html" id="nav-foro"><i class="fa-solid fa-comments"></i><span>Foro</span></a>
+    <a href="ranking.html" id="nav-ranking"><i class="fa-solid fa-ranking-star"></i><span>Ranking</span></a>
+    <a href="recompensas.html" id="nav-recompensas"><i class="fa-solid fa-award"></i><span>Recompensas</span></a>
+    <a href="progreso.html" id="nav-progreso"><i class="fa-solid fa-chart-line"></i><span>Progreso</span></a>
+  </nav>
+  <div class="toggle"><i class="fa-solid fa-angles-left"></i></div>
+</aside>
+<div id="main"><header><h1>Tu Progreso Ambiental</h1></header>
+<section class="progress">
+  <div class="stats">
+    <div class="stat"><h3>9.4 kg</h3><p>Residuos reciclados</p></div>
+    <div class="stat"><h3>3.1 kg</h3><p>Papel ahorrado</p></div>
+    <div class="stat"><h3>16 kg CO₂</h3><p>Emisiones evitadas</p></div>
+  </div>
+  <canvas id="barChart" width="380" height="200"></canvas>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</div>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
