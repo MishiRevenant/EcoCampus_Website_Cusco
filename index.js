@@ -1,6 +1,28 @@
 
 const toggleBtn=document.querySelector('#sidebar .toggle');
 const sidebar=document.getElementById('sidebar');
+if(window.innerWidth<=768){
+  sidebar.classList.add('collapsed');
+  if(toggleBtn){
+    toggleBtn.querySelector('i').classList.add('fa-angles-right');
+    toggleBtn.querySelector('i').classList.remove('fa-angles-left');
+  }
+}
+window.addEventListener('resize',()=>{
+  if(window.innerWidth<=768){
+    sidebar.classList.add('collapsed');
+    if(toggleBtn){
+      toggleBtn.querySelector('i').classList.add('fa-angles-right');
+      toggleBtn.querySelector('i').classList.remove('fa-angles-left');
+    }
+  }else{
+    sidebar.classList.remove('collapsed');
+    if(toggleBtn){
+      toggleBtn.querySelector('i').classList.remove('fa-angles-right');
+      toggleBtn.querySelector('i').classList.add('fa-angles-left');
+    }
+  }
+});
 if(toggleBtn){toggleBtn.addEventListener('click',()=>{sidebar.classList.toggle('collapsed');toggleBtn.querySelector('i').classList.toggle('fa-angles-right');toggleBtn.querySelector('i').classList.toggle('fa-angles-left');});}
 const page=(location.pathname.split('/').pop()||'index.html').replace('.html','');
 const active=document.getElementById('nav-'+page);
