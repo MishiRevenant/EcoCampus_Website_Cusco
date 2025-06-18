@@ -1,19 +1,37 @@
-
 :root{
- --bg:#15171a;
- --surface:#1e2126;
- --surface2:#272b31;
- --surface3:#32363d;
- --text:#e0e0e0;
- --text-muted:#b8b8b8;
- --accent:#b81fb8;
- --accent2:#8d1283;
+  --bg:#15171a;
+  --surface:#1e2126;
+  --surface2:#272b31;
+  --surface3:#32363d;
+  --text:#e0e0e0;
+  --text-muted:#b8b8b8;
+  --accent:#b81fb8;
+  --accent2:#8d1283;
 }
+
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
-body{background:var(--bg);color:var(--text);display:flex;min-height:100vh;overflow-x:hidden;}
-a{color:var(--accent2);text-decoration:none;}
-#sidebar{width:250px;background:var(--surface);display:flex;flex-direction:column;transition:width .3s;}
-#sidebar.collapsed{width:68px;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* --- SIDEBAR --- */
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  transition: width .3s;
+  z-index: 100;
+}
+
+#sidebar.collapsed {width:68px;}
 #sidebar .brand{display:flex;align-items:center;padding:1rem;gap:.75rem;}
 #sidebar .brand img{height:32px;}
 #sidebar .brand span{font-weight:600;}
@@ -23,7 +41,22 @@ a{color:var(--accent2);text-decoration:none;}
 #sidebar nav a:hover,#sidebar nav a.active{background:var(--surface2);border-color:var(--accent);}
 #sidebar nav a i{width:22px;text-align:center;}
 #sidebar .toggle{padding:1rem;text-align:right;cursor:pointer;}
-#main{flex-grow:1;overflow-y:auto;}
+
+/* --- MAIN --- */
+#main {
+  margin-left: 250px; /* <-- ¡Aquí el margen izquierdo igual al sidebar! */
+  flex-grow: 1;
+  overflow-y: auto;
+  min-height: 100vh;
+  transition: margin-left .3s;
+  padding-bottom: 2rem;
+}
+
+#sidebar.collapsed ~ #main {
+  margin-left: 68px; /* Si el sidebar está colapsado */
+}
+
+/* Resto igual */
 header{display:flex;justify-content:space-between;align-items:center;background:var(--surface);padding:1rem 2rem;border-bottom:1px solid var(--surface2);}
 header h1{font-size:1.25rem;font-weight:600;}
 .section-title{text-align:center;font-size:1.5rem;margin:2rem 0 .5rem;}
@@ -76,3 +109,4 @@ tbody tr:hover{background:var(--surface2);}
 .stats{display:flex;justify-content:center;gap:2rem;margin-bottom:1.3rem;flex-wrap:wrap;}
 .stat h3{font-size:1.6rem;}
 .stat p{font-size:.85rem;color:var(--text-muted);}
+
