@@ -2,7 +2,6 @@
 const toggleBtn=document.querySelector('#sidebar .toggle');
 const sidebar=document.getElementById('sidebar');
 
-function updateSidebar(){
   if(window.innerWidth<=768){
     sidebar.classList.add('collapsed');
     if(toggleBtn){
@@ -16,17 +15,8 @@ function updateSidebar(){
       toggleBtn.querySelector('i').classList.add('fa-angles-left');
     }
   }
-}
+leBtn.addEventListener('click',()=>{sidebar.classList.toggle('collapsed');toggleBtn.querySelector('i').classList.toggle('fa-angles-right');toggleBtn.querySelector('i').classList.toggle('fa-angles-left');});}
 
-updateSidebar();
-window.addEventListener('resize',updateSidebar);
-if(toggleBtn){
-  toggleBtn.addEventListener('click',()=>{
-    sidebar.classList.toggle('collapsed');
-    toggleBtn.querySelector('i').classList.toggle('fa-angles-right');
-    toggleBtn.querySelector('i').classList.toggle('fa-angles-left');
-  });
-}
 const page=(location.pathname.split('/').pop()||'index.html').replace('.html','');
 const active=document.getElementById('nav-'+page);
 if(active) active.classList.add('active');
