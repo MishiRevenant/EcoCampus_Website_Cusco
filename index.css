@@ -150,6 +150,17 @@ footer a{
   .hero img {
     height: 220px;
   }
+  .hero-text {
+    position: static;
+    transform: none;
+    padding: 0 1rem;
+    margin-top: 1rem;
+  }
+  footer {
+    position: static;
+    margin: 2rem 0 1rem;
+    justify-content: center;
+  }
 }
 
 /* Ajustes para pantallas muy pequeñas */
@@ -171,6 +182,21 @@ footer a{
   }
   .hero img {
     height: 180px;
+  }
+
+  /* Evitar superposición en el hero */
+  .hero-text {
+    position: static;
+    transform: none;
+    padding: 0 1rem;
+    margin-top: 1rem;
+  }
+
+  /* El footer pasa a flujo normal para que no tape contenido */
+  footer {
+    position: static;
+    margin: 2rem 0 1rem;
+    justify-content: center;
   }
 }
 
