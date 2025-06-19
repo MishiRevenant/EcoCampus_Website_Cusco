@@ -134,6 +134,10 @@ footer{
 footer a{
   color:var(--text-muted);
 }
+/* slightly bigger icons so they're easy to tap */
+footer a i {
+  font-size:1.2rem;
+}
 
 /* --- Mobile --- */
 @media (max-width: 768px) {
@@ -157,9 +161,10 @@ footer a{
     margin-top: 1rem;
   }
   footer {
-    position: static;
-    margin: 2rem 0 1rem;
-    justify-content: center;
+    position: absolute;
+    bottom: .75rem;
+    right: .75rem;
+    font-size: .7rem;
   }
 }
 
@@ -192,11 +197,11 @@ footer a{
     margin-top: 1rem;
   }
 
-  /* El footer pasa a flujo normal para que no tape contenido */
   footer {
-    position: static;
-    margin: 2rem 0 1rem;
-    justify-content: center;
+    position: absolute;
+    bottom: .5rem;
+    right: .5rem;
+    font-size: .6rem;
   }
 }
 
