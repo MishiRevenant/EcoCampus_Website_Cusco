@@ -35,10 +35,13 @@ body{
 #sidebar.collapsed {width:68px;}
 #sidebar .brand{display:flex;align-items:center;padding:1rem;gap:.75rem;}
 #sidebar .brand img{height:32px;}
+#sidebar .brand .logo-small{display:none;}
 #sidebar .brand span{font-weight:600;}
 #sidebar.collapsed .brand span{display:none;}
+#sidebar.collapsed .brand .logo-big{display:none;}
+#sidebar.collapsed .brand .logo-small{display:block;}
 #sidebar nav{flex-grow:1;}
-#sidebar nav a{display:flex;align-items:center;gap:.75rem;padding:.7rem 1rem;font-size:.9rem;color:var(--text);border-left:4px solid transparent;transition:background .25s,border .25s;}
+#sidebar nav a{display:flex;align-items:center;gap:.75rem;padding:.7rem 1rem;font-size:.9rem;color:var(--text);border-left:4px solid transparent;transition:background .25s,border .25s;text-decoration:none;}
 #sidebar nav a:hover,#sidebar nav a.active{background:var(--surface2);border-color:var(--accent);}
 #sidebar nav a i{width:22px;text-align:center;}
 #sidebar.collapsed nav a{justify-content:center;gap:0;}
