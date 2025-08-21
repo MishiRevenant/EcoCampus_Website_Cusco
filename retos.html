@@ -7,413 +7,73 @@
   <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfud-7zsPpyVW9AHJRZ9tBRBeSHVF09SQZZQ&s">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#15171a;
-      --surface:#1e2126;
-      --surface2:#272b31;
-      --surface3:#32363d;
-      --text:#e0e0e0;
-      --text-muted:#b8b8b8;
-      --accent:#b81fb8;
-      --accent2:#8d1283;
-    }
-
-    *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
-    body{
-      background:var(--bg);
-      color:var(--text);
-      min-height:100vh;
-      overflow-x:hidden;
-      position:relative;
-    }
-
-    /* --- SIDEBAR --- */
-    #sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 250px;
-      height: 100vh;
-      background: var(--surface);
-      display: flex;
-      flex-direction: column;
-      transition: width .3s;
-      z-index: 100;
-    }
-
-    #sidebar.collapsed {width:68px;}
-    #sidebar .brand{display:flex;align-items:center;padding:1rem;gap:.75rem;}
-    #sidebar .brand img{height:32px;}
-    #sidebar .brand .logo-small{display:none;}
-    #sidebar .brand span{font-weight:600;}
-    #sidebar.collapsed .brand span{display:none;}
-    #sidebar.collapsed .brand .logo-big{display:none;}
-    #sidebar.collapsed .brand .logo-small{display:block;}
-    #sidebar nav{flex-grow:1;}
-    #sidebar nav a{display:flex;align-items:center;gap:.75rem;padding:.7rem 1rem;font-size:.9rem;color:var(--text);border-left:4px solid transparent;transition:background .25s,border .25s;text-decoration:none;}
-    #sidebar nav a:hover,#sidebar nav a.active{background:var(--surface2);border-color:var(--accent);}
-    #sidebar nav a i{width:22px;text-align:center;}
-    #sidebar.collapsed nav a{justify-content:center;gap:0;}
-    #sidebar.collapsed nav a span{display:none;}
-    #sidebar .toggle{padding:1rem;text-align:right;cursor:pointer;}
-
-    /* --- MAIN --- */
-    #main {
-      margin-left: 250px; /* <-- ¡Aquí el margen izquierdo igual al sidebar! */
-      flex-grow: 1;
-      overflow-y: auto;
-      min-height: 100vh;
-      transition: margin-left .3s;
-      padding-bottom: 2rem;
-    }
-
-    #sidebar.collapsed ~ #main {
-      margin-left: 68px; /* Si el sidebar está colapsado */
-    }
-
-    /* Resto igual */
-    header{display:flex;justify-content:space-between;align-items:center;background:var(--surface);padding:1rem 2rem;border-bottom:1px solid var(--surface2);}
-    header h1{font-size:1.25rem;font-weight:600;}
-    .section-title{text-align:center;font-size:1.5rem;margin:2rem 0 .5rem;}
-    /* hero */
-    .hero{position:relative;}
-    .hero img{width:100%;height:320px;object-fit:cover;filter:brightness(.55);}
-    .hero-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;max-width:620px;}
-    .hero-text h2{font-size:2.1rem;margin-bottom:1rem;}
-    .hero-text p{font-size:1rem;color:var(--text-muted);margin-bottom:1.4rem;}
-    .hero-text .cta{background:var(--accent);color:#111;padding:.7rem 1.5rem;border-radius:7px;font-weight:600;text-decoration:none;display:inline-block;}
-    /* features */
-    .features{padding:1rem 2rem 3rem;}
-    .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin-top:1.2rem;}
-    .feature{background:var(--surface);padding:1.2rem;border-radius:10px;text-align:center;box-shadow:0 0 0 transparent;transition:transform .25s, box-shadow .25s;}
-    .feature:hover{transform:translateY(-4px);box-shadow:0 6px 18px rgba(0,0,0,.3);}
-    .feature i{font-size:1.6rem;margin-bottom:.6rem;color:var(--accent);}
-    .feature h3{font-size:1rem;margin-bottom:.3rem;}
-    .feature p{font-size:.85rem;color:var(--text-muted);}
-    
-    /* cards / retos - NUEVO EFECTO */
-    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;padding:2rem;}
-    .card{
-      width: 100%;
-      max-width: 300px;
-      min-width: 200px;
-      height: 250px;
-      background-color: var(--surface);
-      margin: 10px;
-      border-radius: 10px;
-      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.24);
-      border: 2px solid rgba(7, 7, 7, 0.12);
-      font-size: 16px;   
-      transition: all 0.3s ease;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      cursor: pointer;
-      overflow: hidden;
-    }
-    
-    .card img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
-      transition: all 0.3s ease;
-    }
-    
-    .card-body {
-      padding: 1rem;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-    
-    .card-body h3 {
-      margin-bottom: .4rem;
-      font-size: 1.1rem;
-      color: white;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    
-    .card-body p {
-      font-size: .9rem;
-      color: var(--text-muted);
-      flex-grow: 1;
-      opacity: 0;
-      max-height: 0;
-      transition: all 0.3s ease;
-      margin-bottom: 10px;
-    }
-    
-    .tag {
-      display: inline-block;
-      background: var(--accent);
-      color: #111;
-      font-size: .7rem;
-      padding: .15rem .6rem;
-      border-radius: 4px;
-      margin: .4rem 0 1rem;
-      transition: all 0.3s ease;
-    }
-    
-    .btn {
-      background: var(--accent2);
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      padding: .45rem .9rem;
-      font-size: .85rem;
-      cursor: pointer;
-      align-self: center;
-      text-decoration: none;
-      display: inline-block;
-      transition: all 0.3s ease;
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    
-    .card:hover {
-      height: 270px;
-      transform: translateY(-4px);
-      box-shadow: 0 6px 18px rgba(0,0,0,.3);
-    }
-    
-    .card:hover img {
-      filter: brightness(0.4);
-      transform: scale(1.05);
-    }
-    
-    .card:hover .card-body p {
-      opacity: 1;
-      max-height: 40px;
-    }
-    
-    .card:hover .btn {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    /* foro */
-    .forum{padding:2rem;max-width:900px;margin:auto;}
-    .post{display:flex;gap:1rem;margin-bottom:1rem;}
-    .post img{width:50px;height:50px;border-radius:50%;}
-    .post.reply{margin-left:3rem;}
-    .date{font-size:.75rem;color:var(--text-muted);}
-    .reply-box textarea{width:100%;background:var(--surface3);border:none;color:var(--text);padding:.6rem;border-radius:6px;resize:vertical;}
-    .reply-box button{background:var(--accent2);border:none;color:#fff;padding:.5rem 1rem;border-radius:6px;margin-top:.4rem;cursor:pointer;}
-    /* ranking & tables */
-    table{width:90%;margin:2rem auto;border-collapse:collapse;font-size:.9rem;}
-    th,td{padding:.6rem;text-align:left;}
-    thead{background:var(--surface2);}
-    tbody tr:nth-child(even){background:var(--surface3);}
-    tbody tr:hover{background:var(--surface2);}
-    .note{text-align:center;color:var(--text-muted);font-size:.8rem;margin-bottom:2rem;}
-    /* recompensas */
-    .rewards{padding:2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;}
-    .reward{display:flex;gap:1rem;background:var(--surface);border-radius:10px;padding:1rem;align-items:center;}
-    .reward img{width:90px;height:90px;object-fit:cover;border-radius:7px;}
-    .reward .btn.small{font-size:.8rem;padding:.35rem .8rem;}
-    /* progreso */
-    .progress{padding:2rem;text-align:center;}
-    .stats{display:flex;justify-content:center;gap:2rem;margin-bottom:1.3rem;flex-wrap:wrap;}
-    .stat h3{font-size:1.6rem;}
-    .stat p{font-size:.85rem;color:var(--text-muted);}
-
-    /* footer */
-    footer{
-      position:absolute;
-      bottom:1rem;
-      right:1rem;
-      background:none;
-      color:var(--text-muted);
-      font-size:.75rem;
-      text-align:right;
-      padding:0;
-      display:flex;
-      align-items:center;
-      gap:.4rem;
-    }
-    footer a{
-      color:var(--text-muted);
-    }
-    /* slightly bigger icons so they're easy to tap */
-    footer a i {
-      font-size:1.2rem;
-    }
-
-    /* --- Mobile --- */
-    @media (max-width: 768px) {
-      #sidebar {
-        width: 68px;
-      }
-      #sidebar .brand span,
-      #sidebar nav a span {
-        display: none;
-      }
-      #main {
-        margin-left: 68px;
-      }
-      .hero img {
-        height: 220px;
-      }
-      .hero-text {
-        position: static;
-        transform: none;
-        padding: 0 1rem;
-        margin-top: 1rem;
-      }
-      footer {
-        position: absolute;
-        bottom: .75rem;
-        right: .75rem;
-        font-size: .7rem;
-      }
-      
-      .cards {
-        grid-template-columns: 1fr;
-        justify-items: center;
-      }
-    }
-
-    /* Ajustes para pantallas muy pequeñas */
-    @media (max-width: 480px) {
-      html {
-        font-size: 14px;
-      }
-      header h1 {
-        font-size: 1rem;
-      }
-      .section-title {
-        font-size: 1.25rem;
-      }
-      .hero-text h2 {
-        font-size: 1.6rem;
-      }
-      .hero-text p {
-        font-size: 0.9rem;
-      }
-      .hero img {
-        height: 180px;
-      }
-
-      /* Evitar superposición en el hero */
-      .hero-text {
-        position: static;
-        transform: none;
-        padding: 0 1rem;
-        margin-top: 1rem;
-      }
-
-      footer {
-        position: absolute;
-        bottom: .5rem;
-        right: .5rem;
-        font-size: .6rem;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
 <aside id="sidebar">
   <div class="brand">
-    <img class="logo-big" src="https://ebiz.pe/wp-content/uploads/2025/03/logo-UNIVERSIDAD@2x.png" alt="Logo Universidad-Continental">
-    <img class="logo-small" src="https://postulantes.ucontinental.edu.pe/www/wp-content/uploads/2020/07/movil-logo.png" alt="Logo UC">
+
+  <img class="logo-big" src="https://ebiz.pe/wp-content/uploads/2025/03/logo-UNIVERSIDAD@2x.png" alt="Logo Universidad-Continental">
+  <img class="logo-small" src="https://postulantes.ucontinental.edu.pe/www/wp-content/uploads/2020/07/movil-logo.png" alt="Logo UC">
     <span>EcoCampus</span>
   </div>
   <nav>
     <a href="index.html" id="nav-index"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
-    <a href="retos.html" id="nav-retos"><i class="fa-solid fa-recycle"></i><span>Modelos y metodos de modelado</span></a>
+    <a href="retos.html" id="nav-retos"><i class="fa-solid fa-recycle"></i><span>Retos</span></a>
     <a href="foro.html" id="nav-foro"><i class="fa-solid fa-comments"></i><span>Foro</span></a>
+    <a href="ranking.html" id="nav-ranking"><i class="fa-solid fa-ranking-star"></i><span>Ranking</span></a>
     <a href="recompensas.html" id="nav-recompensas"><i class="fa-solid fa-award"></i><span>Recompensas</span></a>
     <a href="progreso.html" id="nav-progreso"><i class="fa-solid fa-chart-line"></i><span>Progreso</span></a>
   </nav>
   <div class="toggle"><i class="fa-solid fa-angles-left"></i></div>
 </aside>
-
-<div id="main">
-  <header>
-    <h1>Retos Actuales · Semana 9</h1>
-  </header>
-  
-  <section class="cards">
-    <article class="card">
-      <img src="https://cdn.todamateria.com/imagenes/comunicacion-cke.jpg">
-      <div class="card-body">
-        <h3>Comunicacion</h3>
-        <p>Coordinar con stakeholders y equipo.</p>
-        <span class="tag">Primer paso</span>
-      </div>
-    </article>
-    
-    <article class="card">
-      <img src="https://www.cingenieria.pe/wp-content/uploads/2021/08/planeacion.jpeg">
-      <div class="card-body">
-        <h3>Planeacion</h3>
-        <p>Definir objetivos y plan del proyecto.</p>
-        <span class="tag">Segundo Paso</span>
-      </div>
-    </article>
-    
-    <article class="card">
-      <img src="https://img.freepik.com/vector-premium/software-desarrollo-objetos-modelado-3d_25147-90.jpg">
-      <div class="card-body">
-        <h3>Modelado</h3>
-        <p>Crear representaciones visuales del sistema.</p>
-        <span class="tag">Tercer Paso</span>
-      </div>
-    </article>
-    
-    <article class="card">
-      <img src="https://isil.pe/blog/wp-content/uploads/2023/10/mejores-herramientas-desarrollo-software.png">
-      <div class="card-body">
-        <h3>Construccion </h3>
-        <p>Desarrollar y programar el software.</p>
-        <span class="tag">Cuarto Paso</span>
-      </div>
-    </article>
-    <article class="card">
-      <img src="https://images.wondershare.com/pdfelement/pdf-business-tips/software-development.png">
-      <div class="card-body">
-        <h3>Despliegue </h3>
-        <p>Implementar y liberar el sistema.</p>
-        <span class="tag">Quinto Paso</span>
-      </div>
-    </article>
-  </section>
+<div id="main"><header><h1>Retos Actuales · Semana 9</h1></header>
+<section class="cards">
+  <article class="card">
+    <img src="https://biodog.es/wp-content/uploads/2019/04/Pet-friendly-biodog-alimentacion-natural-copia.jpg">
+    <div class="card-body">
+      <h3>Desafío PET‑Free</h3>
+      <p>Recolecta 20 botellas de plástico y deposítalas en los contenedores de tu pabellón.</p>
+      <span class="tag">+50 pts</span>
+      <a class="btn" href="#">Unirme</a>
+    </div>
+  </article>
+  <article class="card">
+    <img src="https://dical.es/modules/ph_simpleblog/covers/49.jpg">
+    <div class="card-body">
+      <h3>Papel Circular</h3>
+      <p>Lleva apuntes viejos a los contenedores azules de biblioteca.</p>
+      <span class="tag">+30 pts</span>
+      <a class="btn" href="#">Unirme</a>
+    </div>
+  </article>
+  <article class="card">
+    <img src="https://cdn.www.gob.pe/uploads/document/file/3317994/manos%20compost.jpg.jpg">
+    <div class="card-body">
+      <h3>Compost al Patio</h3>
+      <p>Aporta restos de fruta en los puntos de compostaje del patio central.</p>
+      <span class="tag">+40 pts</span>
+      <a class="btn" href="#">Unirme</a>
+    </div>
+  </article>
+  <article class="card">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFE4rpxh29ffvaR0AksrKA4sFALFi1bjCbjA&s">
+    <div class="card-body">
+      <h3>E‑Waste Weekend</h3>
+      <p>Entrega electrónicos dañados en el módulo TIC (viernes).</p>
+      <span class="tag">+70 pts</span>
+      <a class="btn" href="#">Unirme</a>
+    </div>
+  </article>
+</section>
 </div>
-
+<script src="index.js"></script>
 <footer>
   Patentado por José Manuel Ferro Monteagudo
-  <a href="https://www.facebook.com/xdxd.xdxd.71465"><i class="fa-brands fa-facebook"></i></a>
+ <a href="https://www.facebook.com/xdxd.xdxd.71465"><i class="fa-brands fa-facebook"></i></a>
   <a href="https://www.instagram.com/xdxd.xdxd.71465/"><i class="fa-brands fa-instagram"></i></a>
   <a href="https://github.com/MishiRevenant"><i class="fa-brands fa-github"></i></a>
 </footer>
-
-<script>
-  // Toggle sidebar
-  document.querySelector('.toggle').addEventListener('click', function() {
-    document.getElementById('sidebar').classList.toggle('collapsed');
-    
-    // Cambiar el icono cuando se colapsa/expande
-    const icon = this.querySelector('i');
-    if (document.getElementById('sidebar').classList.contains('collapsed')) {
-      icon.classList.remove('fa-angles-left');
-      icon.classList.add('fa-angles-right');
-    } else {
-      icon.classList.remove('fa-angles-right');
-      icon.classList.add('fa-angles-left');
-    }
-  });
-</script>
-
 </body>
 </html>
